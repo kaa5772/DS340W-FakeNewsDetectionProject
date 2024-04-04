@@ -28,7 +28,7 @@ parser.add_argument('--n_epochs', default=3, type=int)
 parser.add_argument('--n_samples', default=16, type=int)
 parser.add_argument('--u_thres', default=5, type=int)
 args = parser.parse_args()
-device = torch.device("cpu")
+device = torch.device("cuda")
 
 torch.manual_seed(0)
 np.random.seed(0)
@@ -42,7 +42,7 @@ n_samples = args.n_samples
 max_len = 512
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
 
-train_conf, adj = pickle.load(open('data/adjs/user_t' + str(user_threshold) + '/' + datasetname + '_nn_relations_' + str(n_samples) + '.pkl', 'rb'))
+train_conf, adj = pickle.load(open('data/adjs/user_t'pwd + str(user_threshold) + '/' + datasetname + '_nn_relations_' + str(n_samples) + '.pkl', 'rb'))
 A_nn = adj.todense()
 A_nn = torch.FloatTensor(A_nn).to(device)
 train_conf = torch.Tensor(train_conf).to(device)
